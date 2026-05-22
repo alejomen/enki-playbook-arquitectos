@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ENKI | Playbook para arquitectos</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Navegacion del playbook">
+        <div class="brand">
+          <span class="brand-mark">ENKI</span>
+          <span class="brand-subtitle">Sistema para arquitectos</span>
+        </div>
+
+        <label class="search-box" for="searchInput">
+          <span>Buscar</span>
+          <input id="searchInput" type="search" placeholder="bloque, fase, prompt..." />
+        </label>
+
+        <nav class="block-list" id="blockList" aria-label="Bloques del documento"></nav>
+      </aside>
+
+      <main class="workspace">
+        <section class="topbar">
+          <div>
+            <p class="eyebrow">Guia base interactiva</p>
+            <h1>Crear y vender una linea de mobiliario propia con respaldo ENKI</h1>
+          </div>
+          <div class="topbar-actions">
+            <button class="ghost-button" id="copyCurrentPrompt" type="button">Copiar prompt</button>
+            <button class="ghost-button" id="openProfit" type="button">Rentabilidad</button>
+            <button class="primary-button" id="openFlow" type="button">Ver flujo</button>
+          </div>
+        </section>
+
+        <section class="hero-grid" aria-label="Resumen del modelo">
+          <article class="model-card">
+            <p class="card-label">Idea madre</p>
+            <h2>El arquitecto vende, disena y lidera. ENKI convierte la propuesta en producto fabricable.</h2>
+            <p>
+              Este playbook ordena el sistema para que el arquitecto pueda captar mejor, cobrar antes,
+              cerrar con mas claridad y escalar su negocio sin convertirse en fabrica.
+            </p>
+          </article>
+
+          <article class="calculator-card" aria-label="Calculadora de moodboard">
+            <div class="card-heading">
+              <p class="card-label">Calculadora</p>
+              <span>1%</span>
+            </div>
+            <label for="estimateInput">Valor estimado del proyecto</label>
+            <div class="money-input">
+              <span>Ref.</span>
+              <input id="estimateInput" type="number" min="0" step="100" value="10000" />
+            </div>
+            <div class="fee-result">
+              <span>Moodboard recomendado</span>
+              <strong id="moodboardFee">Ref. 100</strong>
+            </div>
+            <p class="microcopy">Referencia operativa: cobrar el moodboard antes del levantamiento.</p>
+          </article>
+
+          <article class="visual-board" aria-label="Muestra visual ENKI">
+            <div class="sample-slide">
+              <div class="sample-title">
+                <span>Moodboard</span>
+                <strong>Ficha tecnica + direccion visual</strong>
+              </div>
+              <div class="sample-layout">
+                <div class="sample-image"></div>
+                <div class="sample-notes">
+                  <span>Concepto</span>
+                  <span>Materiales</span>
+                  <span>Criterios</span>
+                </div>
+              </div>
+              <div class="material-strip">
+                <i class="wood"></i>
+                <i class="stone"></i>
+                <i class="matte"></i>
+                <i class="metal"></i>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="selected-block" id="selectedBlock" aria-live="polite"></section>
+
+        <section class="profit-calculator" id="profitCalculator" aria-label="Calculadora de rentabilidad mensual">
+          <div class="profit-intro">
+            <div class="section-head">
+              <p class="eyebrow">Como gana dinero el arquitecto</p>
+              <h2>Calculadora mensual de rentabilidad llave en mano</h2>
+            </div>
+            <p>
+              Simula ventas mensuales, margen de carpinteria, honorarios, moodboards, alcance llave en mano
+              y costos fijos. Los supuestos base vienen del pitch ENKI: costo promedio por tablero Ref. 240,
+              precio de venta Ref. 310-420 y gastos fijos de referencia Ref. 8.000/mes.
+            </p>
+          </div>
+
+          <div class="profit-layout">
+            <div class="profit-inputs">
+              <div class="input-group">
+                <h3>Volumen comercial</h3>
+                <div class="profit-field-grid">
+                  <label>
+                    Proyectos cerrados / mes
+                    <input id="projectsPerMonth" type="number" min="0" step="1" value="4" />
+                  </label>
+                  <label>
+                    Tableros por proyecto
+                    <input id="boardsPerProject" type="number" min="0" step="1" value="18" />
+                  </label>
+                  <label>
+                    Precio venta por tablero
+                    <input id="boardSellPrice" type="number" min="0" step="10" value="350" />
+                  </label>
+                  <label>
+                    Costo ENKI por tablero
+                    <input id="boardCost" type="number" min="0" step="10" value="240" />
+                  </label>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <h3>Servicios y llave en mano</h3>
+                <div class="profit-field-grid">
+                  <label>
+                    Costo externo por proyecto
+                    <input id="turnkeyCostPerProject" type="number" min="0" step="100" value="2500" />
+                  </label>
+                  <label>
+                    Margen sobre externos %
+                    <input id="turnkeyMarkup" type="number" min="0" step="1" value="18" />
+                  </label>
+                  <label>
+                    Honorarios diseno / proyecto
+                    <input id="designFeePerProject" type="number" min="0" step="50" value="450" />
+                  </label>
+                  <label>
+                    Gastos fijos / mes
+                    <input id="monthlyFixedCosts" type="number" min="0" step="100" value="8000" />
+                  </label>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <h3>Moodboards pagados</h3>
+                <div class="profit-field-grid">
+                  <label>
+                    Moodboards cobrados / mes
+                    <input id="moodboardsPerMonth" type="number" min="0" step="1" value="8" />
+                  </label>
+                  <label>
+                    Valor estimado promedio
+                    <input id="moodboardAverageProject" type="number" min="0" step="500" value="10000" />
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="profit-results">
+              <div class="metric-main">
+                <span>Utilidad neta mensual</span>
+                <strong id="netProfit">Ref. 0</strong>
+                <small id="profitReadout">Ajusta los supuestos para ver el escenario.</small>
+              </div>
+
+              <div class="metric-grid">
+                <div class="metric-item">
+                  <span>Ingresos mensuales</span>
+                  <strong id="totalMonthlyRevenue">Ref. 0</strong>
+                </div>
+                <div class="metric-item">
+                  <span>Margen neto</span>
+                  <strong id="netMargin">0%</strong>
+                </div>
+                <div class="metric-item">
+                  <span>Utilidad bruta</span>
+                  <strong id="grossProfit">Ref. 0</strong>
+                </div>
+                <div class="metric-item">
+                  <span>Costos directos</span>
+                  <strong id="totalDirectCosts">Ref. 0</strong>
+                </div>
+                <div class="metric-item">
+                  <span>Tableros / mes</span>
+                  <strong id="boardsPerMonth">0</strong>
+                </div>
+                <div class="metric-item">
+                  <span>Uso vs celula 1.000</span>
+                  <strong id="capacityUse">0%</strong>
+                </div>
+                <div class="metric-item">
+                  <span>Break-even</span>
+                  <strong id="breakEvenProjects">0 proyectos</strong>
+                </div>
+                <div class="metric-item">
+                  <span>Ganancia por tablero</span>
+                  <strong id="profitPerBoard">Ref. 0</strong>
+                </div>
+              </div>
+
+              <div class="revenue-split">
+                <div>
+                  <span>Margen carpinteria</span>
+                  <strong id="carpentryGrossProfit">Ref. 0</strong>
+                </div>
+                <div>
+                  <span>Margen llave en mano</span>
+                  <strong id="turnkeyGrossProfit">Ref. 0</strong>
+                </div>
+                <div>
+                  <span>Honorarios + moodboards</span>
+                  <strong id="serviceRevenue">Ref. 0</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="source-note">
+            Referencia de costos:
+            <a href="https://enki-pitchdeck-32o4i9m.gamma.site/#card-2mqh6t693sd1zry" target="_blank" rel="noreferrer">
+              pitch deck ENKI
+            </a>.
+            Ajustar por ciudad, alcance, instalacion, proveedores y nivel de servicio del arquitecto.
+          </p>
+        </section>
+
+        <section class="tool-grid">
+          <article class="prompt-builder">
+            <div class="section-head">
+              <p class="eyebrow">Herramienta editable</p>
+              <h2>Prompt de trabajo para el arquitecto</h2>
+            </div>
+            <div class="builder-grid">
+              <label>
+                Proyecto
+                <input id="projectName" type="text" value="Cocina apartamento Los Palos Grandes" />
+              </label>
+              <label>
+                Cliente
+                <input id="clientName" type="text" value="Cliente residencial" />
+              </label>
+              <label>
+                Espacio
+                <input id="spaceType" type="text" value="Cocina lineal" />
+              </label>
+              <label>
+                Estilo
+                <input id="styleIntent" type="text" value="moderno, calido, sobrio, funcional" />
+              </label>
+            </div>
+            <textarea id="generatedPrompt" rows="12" spellcheck="false"></textarea>
+            <div class="inline-actions">
+              <button class="primary-button" id="copyGeneratedPrompt" type="button">Copiar prompt editable</button>
+              <span id="copyNotice" role="status" aria-live="polite"></span>
+            </div>
+          </article>
+
+          <article class="questions-card">
+            <div class="section-head">
+              <p class="eyebrow">Captacion</p>
+              <h2>5 preguntas clave</h2>
+            </div>
+            <ol class="question-list">
+              <li>Que espacio quieres intervenir?</li>
+              <li>Que necesitas resolver?</li>
+              <li>Que referencias visuales te gustan?</li>
+              <li>Cual es tu rango de presupuesto?</li>
+              <li>Para cuando necesitas tenerlo listo?</li>
+            </ol>
+            <div class="output-box">
+              <span>Salida</span>
+              <strong>Estimado general inicial</strong>
+            </div>
+          </article>
+        </section>
+
+        <section class="flow-panel" id="flowPanel" aria-label="Flujo operativo ENKI">
+          <div class="section-head">
+            <p class="eyebrow">Flujo corregido</p>
+            <h2>De captacion a garantia</h2>
+          </div>
+          <div class="flow-table" id="flowTable"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
